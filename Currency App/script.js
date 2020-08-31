@@ -8,7 +8,7 @@ const currenciesList = document.querySelector(".currencies");
 
 const dataURL = "https://api.exchangeratesapi.io/latest";
 
-const initialList = ["USD", "EUR", "GBP", "JPY", "RUB"];
+let initialList;
 let baseCurrency;
 let baseCurrencyAmount;
 
