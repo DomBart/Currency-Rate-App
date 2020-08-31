@@ -232,7 +232,11 @@ function addCurrencyListClick(event) {
     const newCurrency = currencies.find(
       (c) => c.abbreviation === clickedListItem.getAttribute("data-currency")
     );
-    if (newCurrency) newCurrenciesListItem(newCurrency);
+     if (newCurrency) {
+      newCurrenciesListItem(newCurrency);
+      initialList.push(newCurrency.abbreviation);
+      localStorage.setItem("userList", JSON.stringify(initialList));
+    }
   }
 }
 
@@ -245,6 +249,8 @@ function currenciesListClick(event) {
     addCurrencyList
       .querySelector(`[data-currency=${parentNode.id}]`)
       .classList.remove("disabled");
+    initialList.splice(initialList.indexOf(parentNode.id), 1);
+    localStorage.setItem("userList", JSON.stringify(initialList));
     if (parentNode.classList.contains("base-currency")) {
       const newBaseCurrencyLI = currenciesList.querySelector(".currency");
       if (newBaseCurrencyLI) {
@@ -402,6 +408,13 @@ function newCurrenciesListItem(currency) {
           <span class="close">&times;</span>
         </li>`
   );
+}
+
+if (localStorage.getItem("userList")) {
+  initialList = JSON.parse(localStorage.getItem("userList"));
+} else {
+  initialList = ["USD", "EUR", "GBP"];
+  localStorage.setItem("userList", JSON.stringify(initialList));
 }
 
 fetch(dataURL)
