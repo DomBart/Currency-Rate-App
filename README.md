@@ -1,2 +1,2 @@
 # Currency-Rate-App
-An user friendly web app for currency rate calculations
+User friendly web app for currency rate calculations
